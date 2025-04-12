@@ -1,13 +1,17 @@
 ﻿// study2025.cpp : 애플리케이션에 대한 진입점을 정의합니다.
 //
 
+#include "pch.h"
 #include "framework.h"
 #include "study2025.h"
+
+#include "Core.h"
 
 #define MAX_LOADSTRING 100
 
 // 전역 변수:
 HINSTANCE hInst;                                // 현재 인스턴스입니다.
+HWND hWnd;
 WCHAR szTitle[MAX_LOADSTRING];                  // 제목 표시줄 텍스트입니다.
 WCHAR szWindowClass[MAX_LOADSTRING];            // 기본 창 클래스 이름입니다.
 
@@ -38,18 +42,15 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
         return FALSE;
     }
 
+    if (FAILED(Core::Instance()->Init(hWnd, POINT{ 1280,768 }))) {
+        MessageBox(nullptr, L"Core 객체 초기화 실패", L"ERROR", MB_OK);
+        return FALSE;
+    }
+
     // 단축키 테이블 정보 로딩
     HACCEL hAccelTable = LoadAccelerators(hInstance, MAKEINTRESOURCE(IDC_STUDY2025));
- 
+
     MSG msg;
-
-    // 기본 메시지 루프입니다:
-    // GetMessage : 메세지큐에서 메세지 확인 될 때까지 대기
-    //  = 메세지가 없으면 안굴러간다 !!
-    // msg.message == WM_QUIT일 경우 false 반환 -> 프로그램 종료
-
-    // PeekMessage : 메세지 슬쩍 보겠다 = 메세지큐에서 메세지를 확인한 경우 true, 없는 경우 false
-    // 가장 큰 특징 메세지가 없더라도 계속 반환
 
     while (true) {
         if (PeekMessage(&msg, nullptr, 0, 0, PM_REMOVE)){
@@ -60,12 +61,9 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
                 TranslateMessage(&msg);
                 DispatchMessage(&msg);
             }
-
-            else {
-                // 메세지가 없을 때 처리되는 부분
-                // Game Code, 디자인 패턴, 싱글톤 패턴
-                // 게임 프레임워크 !!
-            }
+        }
+        else {  
+             Core::Instance()->Progress(); 
         }
     }
 
@@ -104,7 +102,7 @@ BOOL InitInstance(HINSTANCE hInstance, int nCmdShow)
    hInst = hInstance; // 인스턴스 핸들을 전역 변수에 저장합니다.
 
    // 윈도우 창 만들기(OS 관할) -> 여러 함수와 ID 존재 -> 우리(프로그래머)는 이를 이용해서 코딩해야 한다 !
-   HWND hWnd = CreateWindowW(szWindowClass, szTitle, WS_OVERLAPPEDWINDOW,
+   hWnd = CreateWindowW(szWindowClass, szTitle, WS_OVERLAPPEDWINDOW,
       CW_USEDEFAULT, 0, CW_USEDEFAULT, 0, nullptr, nullptr, hInstance, nullptr);
 
    if (!hWnd)
@@ -121,17 +119,6 @@ BOOL InitInstance(HINSTANCE hInstance, int nCmdShow)
 
 //  함수: WndProc(HWND, UINT, WPARAM, LPARAM)
 //  용도: 주 창의 메시지를 처리합니다.
-
-struct tObjInfo {
-    POINT objPos;       // 중심좌표
-    POINT objScale;     // 중심좌표로부터의 크기
-};
-
-vector<tObjInfo> vecInfo;   // 사각형의 정보를 저장하는 vector
-
-POINT ptLT;             // 마우스를 눌렀을 때의 좌표
-POINT ptRB;             // 마우스를 뗐을 때의 좌표
-bool act = false;       // 사각형을 무작정 그리지 않기 위해 만든 bool변수
 
 LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 {
@@ -159,89 +146,9 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
             PAINTSTRUCT ps;
             HDC hdc = BeginPaint(hWnd, &ps);
 
-            HPEN hRedPen = CreatePen(BS_SOLID, 1, RGB(255, 0, 0));
-            HBRUSH hBlackBrush = (HBRUSH)GetStockObject(BLACK_BRUSH);
-
-            HPEN hDefPen = (HPEN)SelectObject(hdc, hRedPen);
-            HBRUSH hDefBrush = (HBRUSH)SelectObject(hdc, hBlackBrush);
-
-            if (act) {
-                Rectangle(hdc, ptLT.x, ptLT.y, ptRB.x, ptRB.y);
-            }
-
-            for (size_t i = 0; i < vecInfo.size(); ++i) {
-                Rectangle(hdc,
-                    vecInfo[i].objPos.x - vecInfo[i].objScale.x / 2,
-                    vecInfo[i].objPos.y - vecInfo[i].objScale.y / 2,
-                    vecInfo[i].objPos.x + vecInfo[i].objScale.x / 2,
-                    vecInfo[i].objPos.y + vecInfo[i].objScale.y / 2);
-            }
-
-            SelectObject(hdc, hDefPen);
-            SelectObject(hdc, hDefBrush);
-            DeleteObject(hRedPen);
-            DeleteObject(hDefBrush);
-
             EndPaint(hWnd, &ps);
         }
         break;
-
-    case WM_LBUTTONDOWN: 
-    {
-        ptLT.x = LOWORD(lParam);
-        ptLT.y = HIWORD(lParam);
-        act = true;
-    }
-        break;
-
-    case WM_MOUSEMOVE:
-    {
-        ptRB.x = LOWORD(lParam);
-        ptRB.y = HIWORD(lParam);
-        InvalidateRect(hWnd, nullptr, true);  // 전체 영역을 초기화 다시 그리는 애 -> 더블버퍼링 !
-    }
-        break;
-
-    case WM_LBUTTONUP:
-    {
-        tObjInfo info {};
-
-        info.objPos.x = (ptLT.x + ptRB.x) / 2;
-        info.objPos.y = (ptLT.y + ptRB.y) / 2;
-
-        info.objScale.x = abs(ptLT.x - ptRB.x);
-        info.objScale.y = abs(ptLT.y - ptRB.y);
-
-        vecInfo.push_back(info);
-        act = false;
-        InvalidateRect(hWnd, nullptr, true);
-    }
-        break;
-    /*case WM_KEYDOWN:
-    {
-        switch (wParam)
-        {
-        case VK_UP:
-            objPos.y -= 10;
-            InvalidateRect(hWnd, nullptr, true);
-            break;
-        case VK_DOWN:
-            objPos.y += 10;
-            InvalidateRect(hWnd, nullptr, true);
-            break;
-        case VK_RIGHT:
-            objPos.x += 10;
-            InvalidateRect(hWnd, nullptr, true);
-            break;
-        case VK_LEFT:
-            objPos.x -= 10;
-            InvalidateRect(hWnd, nullptr, true);
-            break;
-        case 'W': 
-            break;
-        }
-    }
-        break; */
     case WM_DESTROY:
         PostQuitMessage(0);
         break;
