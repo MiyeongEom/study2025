@@ -2,6 +2,7 @@
 #include "Core.h"
 
 #include "TimeMgr.h"
+#include "KeyMgr.h"
 
 #include "Object.h"
 
@@ -33,6 +34,7 @@ int Core::Init(HWND _handle, POINT _ptResolution)        // class 객체가 시작할 
 
     // Manager
     TimeMgr::Instance()->Init();
+    KeyMgr::Instance()->Init();
 
     //    실제로 그릴 수 있는 영역을 계산한다.
     //    메뉴바나 윈도우 창 주변으로 생겨있는 테두리 영역을 제외한 영역을 계산한다.
@@ -74,6 +76,7 @@ int Core::Init(HWND _handle, POINT _ptResolution)        // class 객체가 시작할 
 void Core::Progress()
 {
     TimeMgr::Instance()->Update();
+    KeyMgr::Instance()->Update();
 
     Update();
     Render();
@@ -83,10 +86,10 @@ void Core::Update()
 {
     Vec2 vPos = obj.getPos();
 
-    if (GetAsyncKeyState(VK_LEFT) & 0x8000) {
+    if (KeyMgr::Instance()->GetKetState(KEY::LEFT)==KEY_STATE::AWAY) {
         vPos.x -= 200.f * DT;
     }
-    if (GetAsyncKeyState(VK_RIGHT) & 0x8000) {
+    if (KeyMgr::Instance()->GetKetState(KEY::RIGHT) == KEY_STATE::AWAY) {
         vPos.x += 200.f * DT;
     } 
 
@@ -112,4 +115,22 @@ void Core::Render()
         mDC, 0, 0, SRCCOPY);   // 복사 대상
 
 }
+
+
+// Key Manager
+// : 1) A와 B물체가 이동하는 게임이다. 키 매니저가 없으면 자신의 키 입력을 개별적으로 처리하게 된다. 
+//      수 백번의 상황 중에 A 물체는 현재 프레임(시간)에 이동을 처리하지만, B는 다음 프레임에서 이동이 처리될 수 있다. 
+// : 2) 우리가 점프를 하는 게임이야. 점프킹. 짧게 눌럿을 때랑 길게 눌렀을 때랑 날라가는 폭이 다른 게임이다. 이를 어떻게 구현??
+
+
+// 우리 작업하는 구조 : 매 순간 UPDATE 확인하고 있음 -> 업데이트 끝났을 때 변경점을 반영해서 랜더(Render) 
+// 우리 한 프레임 시간(DT)이 지난 후의 결과값을 볼 수 있다. 따로따로 이동하는 것을 볼 수 없지.
+// 같은 프레임 내에서 A -> B (같은 DT) 볼 수 없다. (같이 움직이는걸로 보인다)
+// 한 프레임에서 적용된 키는 같은 이벤트로 처리되어야 한다 (규칙)
+
+// [역할]
+// 1. 프레임 동기화 : 동일 프레임 내에 일어난 일은 같은 키에 대해 동일한 이벤트로 처리한다.
+// 2. 키 입력을 여러 이벤트로 나눠 처리할 수 있다 : TAP, HOLD, AWAY, NONE
+
+
 
