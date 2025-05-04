@@ -9,12 +9,13 @@ public:
 	Object();
 	~Object();
 
-	// interface
-	//  -> set, get
-
 	void setPos(Vec2 _vPos) { vPos = _vPos; }
 	void setScale(Vec2 _vSacle) { vScale = _vSacle; }
 
 	Vec2 getPos() { return vPos; }
 	Vec2 getScale () { return vScale; }
+
+public:
+	void Update();
+	void Render(HDC _hdc);
 };

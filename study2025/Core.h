@@ -10,10 +10,6 @@ private:
 	HBITMAP		hBit;
 	HDC			mDC;
 
-private:	
-	void		Update();
-	void		Render();
-
 public:
 	int			Init(HWND _handle, POINT _ptResolution);
 	void		Progress();

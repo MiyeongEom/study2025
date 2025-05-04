@@ -1,69 +1,121 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <Filter Include="소스 파일">
-      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
-      <Extensions>cpp;c;cc;cxx;c++;cppm;ixx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
-    </Filter>
-    <Filter Include="헤더 파일">
-      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
-      <Extensions>h;hh;hpp;hxx;h++;hm;inl;inc;ipp;xsd</Extensions>
-    </Filter>
     <Filter Include="리소스 파일">
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
+    <Filter Include="Define">
+      <UniqueIdentifier>{4d969cd5-908b-4b84-bd0e-e2acb246ae28}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine">
+      <UniqueIdentifier>{8def420f-2db7-4067-b5fc-cb428d5848b3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\01. Header">
+      <UniqueIdentifier>{44496a1a-6009-4f8e-bbb4-096087cf92e9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\02. Core">
+      <UniqueIdentifier>{823636eb-cb68-45e9-96ff-409caac0ad8e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\03. Manager">
+      <UniqueIdentifier>{5e350fde-8612-497f-bca2-d4b879cb4b0e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\03. Manager\Time">
+      <UniqueIdentifier>{8cc4e510-2a70-48df-8bb7-861b4f39dc35}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\03. Manager\Key">
+      <UniqueIdentifier>{12ec88ea-6d22-4251-8e5c-12ead93e6117}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\04. Object">
+      <UniqueIdentifier>{23b6ba3f-367b-4839-8ec6-bf16f9baa166}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\05. Scene">
+      <UniqueIdentifier>{cea943ca-486a-452f-8b9b-1ad118d5f1b6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\06. Resource">
+      <UniqueIdentifier>{98a7a9c6-0819-4538-933b-5990ac7f8178}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\07. Component">
+      <UniqueIdentifier>{adfebdc7-413c-455d-8f20-a147aaf67d81}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\08. Module">
+      <UniqueIdentifier>{933210d1-6b46-4350-962f-71c288373493}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\03. Manager\Scene">
+      <UniqueIdentifier>{4d3697de-44d7-4a38-8213-db6963b3be7f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\05. Scene\01. StartScene">
+      <UniqueIdentifier>{91b6f270-32d6-4e83-b821-bdd91437d8e2}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="framework.h">
-      <Filter>헤더 파일</Filter>
+      <Filter>Define</Filter>
     </ClInclude>
     <ClInclude Include="targetver.h">
-      <Filter>헤더 파일</Filter>
-    </ClInclude>
-    <ClInclude Include="Resource.h">
-      <Filter>헤더 파일</Filter>
+      <Filter>Define</Filter>
     </ClInclude>
     <ClInclude Include="study2025.h">
-      <Filter>헤더 파일</Filter>
+      <Filter>Define</Filter>
     </ClInclude>
-    <ClInclude Include="Core.h">
-      <Filter>헤더 파일</Filter>
+    <ClInclude Include="Resource.h">
+      <Filter>Define</Filter>
     </ClInclude>
     <ClInclude Include="pch.h">
-      <Filter>헤더 파일</Filter>
+      <Filter>Engine</Filter>
     </ClInclude>
     <ClInclude Include="define.h">
-      <Filter>헤더 파일</Filter>
-    </ClInclude>
-    <ClInclude Include="Object.h">
-      <Filter>헤더 파일</Filter>
+      <Filter>Engine\01. Header</Filter>
     </ClInclude>
     <ClInclude Include="struct.h">
-      <Filter>헤더 파일</Filter>
+      <Filter>Engine\01. Header</Filter>
     </ClInclude>
-    <ClInclude Include="TimeMgr.h">
-      <Filter>헤더 파일</Filter>
+    <ClInclude Include="Core.h">
+      <Filter>Engine\02. Core</Filter>
     </ClInclude>
     <ClInclude Include="KeyMgr.h">
-      <Filter>헤더 파일</Filter>
+      <Filter>Engine\03. Manager\Key</Filter>
+    </ClInclude>
+    <ClInclude Include="TimeMgr.h">
+      <Filter>Engine\03. Manager\Time</Filter>
+    </ClInclude>
+    <ClInclude Include="Object.h">
+      <Filter>Engine\04. Object</Filter>
+    </ClInclude>
+    <ClInclude Include="Scene.h">
+      <Filter>Engine\05. Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="SceneMgr.h">
+      <Filter>Engine\03. Manager\Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="Scene_Start.h">
+      <Filter>Engine\05. Scene\01. StartScene</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="study2025.cpp">
-      <Filter>소스 파일</Filter>
+      <Filter>Engine</Filter>
     </ClCompile>
     <ClCompile Include="Core.cpp">
-      <Filter>소스 파일</Filter>
-    </ClCompile>
-    <ClCompile Include="Object.cpp">
-      <Filter>소스 파일</Filter>
-    </ClCompile>
-    <ClCompile Include="TimeMgr.cpp">
-      <Filter>소스 파일</Filter>
+      <Filter>Engine\02. Core</Filter>
     </ClCompile>
     <ClCompile Include="KeyMgr.cpp">
-      <Filter>소스 파일</Filter>
+      <Filter>Engine\03. Manager\Key</Filter>
+    </ClCompile>
+    <ClCompile Include="TimeMgr.cpp">
+      <Filter>Engine\03. Manager\Time</Filter>
+    </ClCompile>
+    <ClCompile Include="Object.cpp">
+      <Filter>Engine\04. Object</Filter>
+    </ClCompile>
+    <ClCompile Include="Scene.cpp">
+      <Filter>Engine\05. Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="SceneMgr.cpp">
+      <Filter>Engine\03. Manager\Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="Scene_Start.cpp">
+      <Filter>Engine\05. Scene\01. StartScene</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
