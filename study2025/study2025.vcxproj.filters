@@ -44,8 +44,14 @@
     <Filter Include="Engine\03. Manager\Scene">
       <UniqueIdentifier>{4d3697de-44d7-4a38-8213-db6963b3be7f}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Engine\05. Scene\01. StartScene">
+    <Filter Include="Engine\04. Object\Player">
+      <UniqueIdentifier>{b6191ab8-f44f-4118-a0b8-80d470dbda93}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\05. Scene\StartScene">
       <UniqueIdentifier>{91b6f270-32d6-4e83-b821-bdd91437d8e2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\04. Object\Monster">
+      <UniqueIdentifier>{26f030f2-0f53-46c3-beb0-4534f4c0d004}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -89,7 +95,13 @@
       <Filter>Engine\03. Manager\Scene</Filter>
     </ClInclude>
     <ClInclude Include="Scene_Start.h">
-      <Filter>Engine\05. Scene\01. StartScene</Filter>
+      <Filter>Engine\05. Scene\StartScene</Filter>
+    </ClInclude>
+    <ClInclude Include="Player.h">
+      <Filter>Engine\04. Object\Player</Filter>
+    </ClInclude>
+    <ClInclude Include="Monster.h">
+      <Filter>Engine\04. Object\Monster</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -115,7 +127,13 @@
       <Filter>Engine\03. Manager\Scene</Filter>
     </ClCompile>
     <ClCompile Include="Scene_Start.cpp">
-      <Filter>Engine\05. Scene\01. StartScene</Filter>
+      <Filter>Engine\05. Scene\StartScene</Filter>
+    </ClCompile>
+    <ClCompile Include="Player.cpp">
+      <Filter>Engine\04. Object\Player</Filter>
+    </ClCompile>
+    <ClCompile Include="Monster.cpp">
+      <Filter>Engine\04. Object\Monster</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

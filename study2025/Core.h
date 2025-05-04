@@ -15,4 +15,5 @@ public:
 	void		Progress();
 
 	HWND		getMainHandle() { return handle; }
+	POINT		getResolution() { return ptResolution; }
 };	

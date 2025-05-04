@@ -7,7 +7,7 @@ private:
 
 public:
 	Object();
-	~Object();
+	virtual ~Object();
 
 	void setPos(Vec2 _vPos) { vPos = _vPos; }
 	void setScale(Vec2 _vSacle) { vScale = _vSacle; }
@@ -16,6 +16,6 @@ public:
 	Vec2 getScale () { return vScale; }
 
 public:
-	void Update();
-	void Render(HDC _hdc);
+	virtual void Update()= 0;
+	virtual void Render(HDC _hdc);
 };

@@ -7,8 +7,6 @@
 
 #include "Object.h"
 
-Object obj;
-
 Core::Core()    // 변수 초기화
     :handle(0)
     , ptResolution{}
@@ -68,9 +66,6 @@ int Core::Init(HWND _handle, POINT _ptResolution)        // class 객체가 시작할 
     //  -> 이전에 선택된 비트맵을 반환하고 사용이 끝난 후에 메모리를 누수를 방지해야 해서 삭제하는 일을 진행
     HBITMAP hOldBit = (HBITMAP)SelectObject(mDC, hBit);
     DeleteObject(hOldBit);
-
-    obj.setPos(Vec2((float)(ptResolution.x / 2), (float)(ptResolution.y / 2)));
-    obj.setScale(Vec2(100, 100));
 
     return S_OK;    // HRESULT
 }
