@@ -29,9 +29,6 @@
     <Filter Include="Engine\04. Object">
       <UniqueIdentifier>{23b6ba3f-367b-4839-8ec6-bf16f9baa166}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Engine\05. Scene">
-      <UniqueIdentifier>{cea943ca-486a-452f-8b9b-1ad118d5f1b6}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Engine\06. Resource">
       <UniqueIdentifier>{98a7a9c6-0819-4538-933b-5990ac7f8178}</UniqueIdentifier>
     </Filter>
@@ -47,11 +44,17 @@
     <Filter Include="Engine\04. Object\Player">
       <UniqueIdentifier>{b6191ab8-f44f-4118-a0b8-80d470dbda93}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Engine\04. Object\Monster">
+      <UniqueIdentifier>{26f030f2-0f53-46c3-beb0-4534f4c0d004}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\05. Scene">
+      <UniqueIdentifier>{cea943ca-486a-452f-8b9b-1ad118d5f1b6}</UniqueIdentifier>
+    </Filter>
     <Filter Include="Engine\05. Scene\StartScene">
       <UniqueIdentifier>{91b6f270-32d6-4e83-b821-bdd91437d8e2}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Engine\04. Object\Monster">
-      <UniqueIdentifier>{26f030f2-0f53-46c3-beb0-4534f4c0d004}</UniqueIdentifier>
+    <Filter Include="Engine\04. Object\Missile">
+      <UniqueIdentifier>{80f5d63a-cc4b-4237-a345-de386e7c4932}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -103,6 +106,9 @@
     <ClInclude Include="Monster.h">
       <Filter>Engine\04. Object\Monster</Filter>
     </ClInclude>
+    <ClInclude Include="Missile.h">
+      <Filter>Engine\04. Object\Missile</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="study2025.cpp">
@@ -134,6 +140,9 @@
     </ClCompile>
     <ClCompile Include="Monster.cpp">
       <Filter>Engine\04. Object\Monster</Filter>
+    </ClCompile>
+    <ClCompile Include="Missile.cpp">
+      <Filter>Engine\04. Object\Missile</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

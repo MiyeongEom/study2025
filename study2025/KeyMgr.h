@@ -66,6 +66,6 @@ public:
 	void Update();
 
 public:
-	KEY_STATE GetKetState(KEY key) { return vecKey[(int)key].state; }
+	KEY_STATE GetKeyState(KEY key) { return vecKey[(int)key].state; }
 };
 

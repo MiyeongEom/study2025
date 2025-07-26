@@ -52,7 +52,7 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
     MSG msg;
 
     while (true) {
-        if (PeekMessage(&msg, nullptr, 0, 0, PM_REMOVE)){
+        if (PeekMessage(&msg, nullptr, 0, 0, PM_REMOVE)){  // true & false
             if (WM_QUIT == msg.message)
                 break;
 
