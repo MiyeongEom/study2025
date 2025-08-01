@@ -16,4 +16,5 @@ public:
 
 	HWND		getMainHandle() { return handle; }
 	POINT		getResolution() { return ptResolution; }
+	HDC			GetMainDC() { return hDC; }
 };	

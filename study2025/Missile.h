@@ -3,7 +3,8 @@
 
 class Missile : public Object {
 private:
-	float	dir;
+	float	theta;  // 방향을 각도로 받는다면? vector Normalize!!
+	Vec2	dir;
 
 public:
 	Missile();
@@ -12,12 +13,11 @@ public:
 	virtual void Update();
 	virtual void Render(HDC _hdc);
 
-	void SetDir(bool _up)
+	void SetDir(bool _th) { theta = _th; }
+	void SetDir(Vec2 _dir)
 	{
-		if (_up)
-			dir = -1.f;
-		else
-			dir = 1.f;
+		dir = _dir;
+		dir.Normalize();
 	}
 };
 

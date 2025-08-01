@@ -4,6 +4,7 @@
 #include "TimeMgr.h"
 #include "KeyMgr.h"
 #include "SceneMgr.h"
+#include "PathMgr.h"
 
 #include "Object.h"
 
@@ -30,11 +31,6 @@ int Core::Init(HWND _handle, POINT _ptResolution)        // class 객체가 시작할 
     ptResolution = _ptResolution;
 
     RECT rt = { 0,0, ptResolution.x, ptResolution.y };
-
-    // Manager
-    TimeMgr::Instance()->Init();
-    KeyMgr::Instance()->Init();
-    SceneMgr::Instance()->Init();
 
     //    실제로 그릴 수 있는 영역을 계산한다.
     //    메뉴바나 윈도우 창 주변으로 생겨있는 테두리 영역을 제외한 영역을 계산한다.
@@ -67,6 +63,12 @@ int Core::Init(HWND _handle, POINT _ptResolution)        // class 객체가 시작할 
     HBITMAP hOldBit = (HBITMAP)SelectObject(mDC, hBit);
     DeleteObject(hOldBit);
 
+    // Manager
+    PathMgr::Instance()->Init();
+    TimeMgr::Instance()->Init();
+    KeyMgr::Instance()->Init();
+    SceneMgr::Instance()->Init();
+
     return S_OK;    // HRESULT
 }
 
@@ -82,4 +84,6 @@ void Core::Progress()
 
     BitBlt(hDC, 0, 0, ptResolution.x, ptResolution.y,   // 목적지, 복사 받을 부위
         mDC, 0, 0, SRCCOPY);   // 복사 대상
+
+    TimeMgr::Instance()->Render();
 }

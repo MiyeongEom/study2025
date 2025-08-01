@@ -1,6 +1,8 @@
 #include "pch.h"
 #include "KeyMgr.h"
 
+#include "Core.h"
+
 int arrVK[(int)KEY::LAST] =
 {
 	VK_LEFT,

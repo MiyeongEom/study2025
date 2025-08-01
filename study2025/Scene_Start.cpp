@@ -44,8 +44,3 @@ void Scene_Start::Enter()
 void Scene_Start::Exit()
 {
 }
-
-
-// 다음 주 한시간은 숙제 검사
-// 1) 지금까지 한 수업 + 코드관련해서 시각적으로 정리하기 (FlowChart)
-// 2) 플레이어 기준으로 space바 누르면 미사일(원) 발사

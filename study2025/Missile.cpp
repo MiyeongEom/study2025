@@ -4,8 +4,10 @@
 #include "TimeMgr.h"
 
 Missile::Missile()
-	:dir(1.f)
+	:theta(PI/4.f)
+	,dir(Vec2(1.f, 1.f))
 {
+	dir.Normalize();
 }
 
 Missile::~Missile()
@@ -16,7 +18,11 @@ void Missile::Update()
 {
 	Vec2 vPos = getPos();
 
-	vPos.y += 600.f * fDT * (float)dir;
+	// vPos.x += 600.f * cosf(theta) * fDT;
+	// vPos.y -= 600.f * sinf(theta) * fDT;
+
+	vPos.x += 600.f * dir.x * fDT;
+	vPos.y += 600.f * dir.y * fDT;
 
 	setPos(vPos);
 }

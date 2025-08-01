@@ -30,11 +30,3 @@ void Scene::Render(HDC _hdc)
 			arrObj[i][j]->Render(_hdc);
 	}
 }
-
-void Scene::Enter()
-{
-}
-
-void Scene::Exit()
-{
-}
